@@ -1,10 +1,17 @@
 @props(['team', 'component' => 'dropdown-link'])
+@php
+    // Si $team no es un objeto, intenta buscarlo.
+       if (!is_object($team)) {
+           $team = \App\Models\Team::find($team);
+       }
+@endphp
 
 <form method="POST" action="{{ route('current-team.update') }}" x-data>
     @method('PUT')
     @csrf
 
     <!-- Hidden Team ID -->
+
 {{--    @dd($team) <!-- Esto imprimirá el valor de $team en la página -->  --}}
     @if ($team && isset($team->id))
         <input type="hidden" name="team_id" value="{{ $team->id }}">
@@ -25,3 +32,4 @@
         </div>
     </x-dynamic-component>
 </form>
+
