@@ -13,11 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->withPersonalTeam()->create();
 
-        User::factory()->withPersonalTeam()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            DefaultTeamSeeder::class,
+            AdminUserSeeder::class,
+            ModifyTeams::class,
+            Is_adminSeederDelete::class,
+            Create_user_id_Seeder::class,
         ]);
     }
 }

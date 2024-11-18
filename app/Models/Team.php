@@ -10,24 +10,12 @@ use Laravel\Jetstream\Team as JetstreamTeam;
 
 class Team extends JetstreamTeam
 {
-    /** @use HasFactory<\Database\Factories\TeamFactory> */
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
         'name',
-        'personal_team',
     ];
 
-    /**
-     * The event map for the model.
-     *
-     * @var array<string, class-string>
-     */
     protected $dispatchesEvents = [
         'created' => TeamCreated::class,
         'updated' => TeamUpdated::class,
@@ -35,14 +23,22 @@ class Team extends JetstreamTeam
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Relación para obtener los usuarios de un equipo.
      */
-    protected function casts(): array
+    public function users()
     {
-        return [
-            'personal_team' => 'boolean',
-        ];
+        return $this->belongsToMany(User::class, 'team_user')
+            ->withPivot(['role','team_id', 'user_id'])
+            ->withTimestamps();
     }
+// Funciones no utilizables dado el belongsToMany
+  /*  public function isUserOwner(User $user)
+    {
+        return $this->users()->where('user_id', $user->id)->where('role', 'propietario')->exists();
+    }
+
+    public function isUserAdmin(User $user)
+    {
+        return $this->users()->where('user_id', $user->id)->where('role', 'administrador')->exists();
+    }*/
 }

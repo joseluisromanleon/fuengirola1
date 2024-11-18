@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('team_user', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id');
-            $table->foreignId('user_id');
-            $table->string('role')->nullable();
-            $table->timestamps();
+            $table->foreignId('team_id')->constrained()->onDelete('cascade');// Asocia el equipo
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');// Asocia el usuario
+            $table->string('role')->nullable();  // Define el rol del usuario en el equipo
+            $table->timestamps(); // Fechas de creación y actualización
 
-            $table->unique(['team_id', 'user_id']);
+            // $table->unique(['team_id', 'user_id']);
         });
     }
 

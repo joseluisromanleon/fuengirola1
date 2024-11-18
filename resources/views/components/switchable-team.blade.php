@@ -5,7 +5,13 @@
     @csrf
 
     <!-- Hidden Team ID -->
-    <input type="hidden" name="team_id" value="{{ $team->id }}">
+{{--    @dd($team) <!-- Esto imprimirá el valor de $team en la página -->  --}}
+    @if ($team && isset($team->id))
+        <input type="hidden" name="team_id" value="{{ $team->id }}">
+    @else
+        <p>Error: El equipo no es válido.</p>
+    @endif
+
 
     <x-dynamic-component :component="$component" href="#" x-on:click.prevent="$root.submit();">
         <div class="flex items-center">
