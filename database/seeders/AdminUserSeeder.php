@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Team;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class AdminUserSeeder extends Seeder
 {
@@ -26,27 +25,18 @@ class AdminUserSeeder extends Seeder
                 'is_admin' => true,
                 'current_team_id' => 1,
             ]);
-
-            // Asignar rol de Admin, si usas alguna librería como Spatie o manualmente:
-            // Si estás utilizando roles de Spatie o alguna librería para roles, asigna el rol de administrador
-            // $admin->assignRole('admin'); // Ejemplo con Spatie
-
-            // Si no estás usando roles, puedes dejarlo aquí y añadir un campo en tu modelo User para "is_admin"
-            ///// Persistencia  ////
-            $admin->is_admin = true;
-            $admin->save();
+            // Crear un equipo "Admins" o asignar el equipo correspondiente
+            // $team = Team::create(['name' => 'Admins', 'user_id' => $admin->id]);
         }
 
-        // Aquí, podrías también asociar el admin con los equipos o hacer otras configuraciones necesarias.
+        // Asociar al usuario admin con todos los equipos y asignar el rol "owner" en cada uno
+        // Aquí debes hacer uso de la tabla intermedia `team_user` y establecer el rol
 
-        // Crear o asignar equipos
-        //$teams = Team::factory()->count(3)->create(); // Crear 3 equipos como ejemplo
+        $teams = Team::all();  // O puedes definir los equipos que deseas asociar
 
-        // Asociar el usuario admin con todos los equipos y al role de owner o admin
-        //$admin->teams()->attach($teams->pluck('id')->toArray()); // Asocia al admin con los equipos recién creados
-
-        $admin->teams()->sync([1, 2, 3, 4, 5]); // Asociar al admin con los equipos con ID 1, 2 y 3
-
+        foreach ($teams as $team) {
+            $admin->teams()->attach($team->id, ['role' => 'owner']);
+        }
     }
 }
 
