@@ -26,6 +26,13 @@
                             <x-slot name="trigger">
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700 transition ease-in-out duration-150">
+                                       @if (Auth::check())
+                                            <p>Welcome, {{ Auth::user()->name }}!</p>
+                                        @else
+                                            <p>Welcome, Guest!</p>
+                                        @endif
+                                            <p>Welcome, {{ optional(Auth::user())->name }}!</p>
+
                                         {{ Auth::user()->currentTeam->name }}
 
                                         <svg class="ms-2 -me-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -43,7 +50,7 @@
                                     </div>
 
                                     <!-- Team Settings -->
-                                    <x-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
+                                    <x-dropdown-link href="{{ route('teams.show', optional(Auth::user()->currentTeam)->id) }}">
                                         {{ __('Team Settings') }}
                                     </x-dropdown-link>
 
@@ -54,14 +61,14 @@
                                     @endcan
 
                                     <!-- Team Switcher -->
-                                    @if (Auth::user()->allTeams()->count() > 1)
+                                    @if (Auth::user()->teams()->count() > 1)
                                         <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
                                         <div class="block px-4 py-2 text-xs text-gray-400">
                                             {{ __('Switch Teams') }}
                                         </div>
 
-                                        @foreach (Auth::user()->allTeams() as $team)
+                                        @foreach (Auth::user()->teams() as $team)
                                             <x-switchable-team :team="$team" />
                                         @endforeach
                                     @endif
@@ -201,14 +208,14 @@
                     @endcan
 
                     <!-- Team Switcher -->
-                    @if (Auth::user()->allTeams()->count() > 1)
+                    @if (Auth::user()->teams()->count() > 1)
                         <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
                         <div class="block px-4 py-2 text-xs text-gray-400">
                             {{ __('Switch Teams') }}
                         </div>
 
-                        @foreach (Auth::user()->allTeams() as $team)
+                        @foreach (Auth::user()->teams() as $team)
                             <x-switchable-team :team="$team" component="responsive-nav-link" />
                         @endforeach
                     @endif
