@@ -41,7 +41,8 @@ de usuario), este middleware asegura que todos los dispositivos donde el usuario
 
  3. Middleware en la pila
 El middleware `AuthenticateSession` se encuentra generalmente en la pila de middlewares de 
-4. Jetstream, dentro del grupo de rutas que requieren autenticación.
+
+ 4. Jetstream, dentro del grupo de rutas que requieren autenticación.
 
 Por defecto, Jetstream lo utiliza en las rutas protegidas para garantizar una experiencia segura y
 consistente.

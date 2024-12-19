@@ -20,7 +20,7 @@ class AdminUserSeeder extends Seeder
             $admin = User::create([
                 'name' => 'Admin',
                 'email' => 'admin@tudominio.com', // Cambia a tu correo admin
-                'password' => Hash::make('adminpassword'), // Contraseña que quieras para el admin
+                'password' => Hash::make('administrador'), // Contraseña que quieras para el admin
                 'email_verified_at' => now(),
                 'is_admin' => true,
                 'current_team_id' => 1,

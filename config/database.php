@@ -18,7 +18,8 @@ return [
 
     //'default' => env('DB_CONNECTION', 'sqlite'),
     // development/other-production
-    'default' => env('APP_ENV') === 'development' ? 'mysql_dev' : env('DB_CONNECTION', 'mysql'),
+    // Ternaria para cambio de base de datos en el .env
+    'default' => env('APP_ENV') === 'desarrollo' ? 'mysql_dev' : env('DB_CONNECTION', 'mysql'),
 
 
     /*
@@ -216,7 +217,7 @@ return [
             ],
             'teachers' => [
                 'id' => 5,
-                'name' => 'Students',
+                'name' => 'Teachers',
                 'default_role' => 'member',     // Rol predeterminado para estudiantes
             ],
 

@@ -11,7 +11,7 @@ jason formatter
 
 2 despues en la consola para crear la base de datos y las tablas en mysql:  php artisan migrate
 
-3 para desarrollo he preparado una doble configuracion Dev/Produccion   solo hay que cambiar el entorno en el archivo .env  APP_ENV
+3 para desarrollo he preparado una doble configuracion Development/Produccion   solo hay que cambiar el entorno en el archivo .env  APP_ENV
 
 curso seguido para este repo  de Aprendible
 https://www.youtube.com/@Aprendible
