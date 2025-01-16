@@ -13,20 +13,20 @@ class AdminUserSeeder extends Seeder
     {
 
         // Verificar si el usuario admin ya existe
-        $admin = User::where('email', 'admin@mail.com')->first();
+        $admin = User::where('email', 'admin@tudominio.com')->first();
 
         // Si no existe, crear el usuario admin
         if (!$admin) {
             $admin = User::create([
                 'name' => 'Admin',
-                'email' => 'admin@mail.com', // Cambia a tu correo admin
-                'password' => Hash::make('admin'), // Contraseña que quieras para el admin
+                'email' => 'admin@tudominio.com', // Cambia a tu correo admin
+                'password' => Hash::make('adminpassword'), // Contraseña que quieras para el admin
                 'email_verified_at' => now(),
                 'is_admin' => true,
                 'current_team_id' => 1,
             ]);
             // Crear un equipo "Admins" o asignar el equipo correspondiente
-            //$team = Team::create(['name' => 'Admins', 'user_id' => $admin->id]);
+            // $team = Team::create(['name' => 'Admins', 'user_id' => $admin->id]);
         }
 
         // Asociar al usuario admin con todos los equipos y asignar el rol "owner" en cada uno

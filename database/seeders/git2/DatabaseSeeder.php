@@ -10,19 +10,16 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Seed the application's database.
-     * 1. Crea los Equipos por defecto
-     * 2. Crea el usuario Admin
-     *
-    */
-
+     */
     public function run(): void
     {
-        // Llamar a los seeders en el orden establecido
 
         $this->call([
             DefaultTeamSeeder::class,
             AdminUserSeeder::class,
-
+            ModifyTeams::class,
+            Is_adminSeederDelete::class,
+            Create_user_id_Seeder::class,
         ]);
     }
 }

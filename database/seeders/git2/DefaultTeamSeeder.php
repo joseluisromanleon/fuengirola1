@@ -13,9 +13,9 @@ class DefaultTeamSeeder extends Seeder
      */
     public function run(): void
     {
-        // Crear todos los teams para despues recibir los roles
+        // Crear el equipo de Admins, asignando un usuario Admin
+        // $adminUserId = DB::table('users')->where('is_Admin', 'true')->first()->id ?? null; // Aquí asumimos que el rol admin existe
 
-        // equipo Admins que recibira todos los roles posibles
         Team::create([
             'name' => 'Admins',
         ]);
